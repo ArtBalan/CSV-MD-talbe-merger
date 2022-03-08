@@ -23,7 +23,7 @@ function errorDisplay(code){
       console.log("Error " + code + " : File format not recognized");
       break;
     case 301: 
-      console.log("Error " + code + " : Unknown object")
+      console.log("Error " + code + " : List not found")
       break;                                                                            
     default :
       console.log("Error " + code + " : Unkown error code");
