@@ -17,7 +17,6 @@ function helpMe(){
   console.log("$ create name - create a data list");
   console.log("$ merge source base_on key with source2 on dest - merge 2 data lists")
   console.log("$ preview name - display the keys of the first list element");
-  console.log("$ verify name - verify if all the list element have the same keys as the first one, and add them if missing");
 }
 
 

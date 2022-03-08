@@ -273,17 +273,20 @@ function merge(data, name1, name2, key, out){
 function edit(data, name, key, fct){
   error = false;
   switch(fct){
-    case "lowerCase":
+    case "lowerCase" :
       fct = (str) => {return str.toLowerCase()};
       break;
-    case "upperCase":
+    case "upperCase" :
       fct = (str) => {return str.toUpperCase()};
       break;
-    case "snakeCase":
+    case "snakeCase" :
       fct = (str) => {return ((((str.split(" ")).filter(e => e != "")).map(e => e.charAt(0).toUpperCase() + e.slice(1))).join("_")); }
       break;
-    case "spaceCase": 
-      fct = (str) => {return str.replaceAll("-"," ")}
+    case "camelCase" :
+      fct = (str) => {return ((str.split(" ")).map(e => (e.charAt(0).toUpperCase() + e.slice(1)))).join("")}
+      break;
+    case "spaceCase" : 
+      fct = (str) => { return ((str.split(/(?=[A-Z])/)).join(" "))};
       break;
     default :
       fct = false;
