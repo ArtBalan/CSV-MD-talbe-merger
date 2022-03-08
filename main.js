@@ -74,6 +74,10 @@ function main (){
           }
           else data[tempDataKey] = {};
           break;
+
+        case "edit" : 
+          console.log("edit");
+          break;
         
         default:
           errorDisplay(1);

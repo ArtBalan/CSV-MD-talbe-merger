@@ -186,7 +186,6 @@ function objectToTable(objects){
   objects.forEach(entry => {
   tempstr = "| ";
     keys.forEach(key => {
-    //tempstr += (key.length< entry[key].length -2)?entry[key] + " "*(key.length-entry[key].length) : entry[key];
     tempstr += (entry[key] != "")? entry[key] : 0;
     tempstr += " | ";
     });
@@ -213,7 +212,6 @@ function objectToCsv(objects){
   objects.forEach(entry => {
   tempstr = "";
     keys.forEach(key => {
-    //tempstr += (key.length< entry[key].length -2)?entry[key] + " "*(key.length-entry[key].length) : entry[key];
     tempstr += (entry[key] != "")? entry[key] : 0;
     tempstr += " , ";
     });
@@ -233,8 +231,6 @@ function objectToCsv(objects){
  * @param {string} out Name of the object list resulting of the merge
  * @returns Main List
  */
-
-
 function merge(data, name1, name2, key, out){
   let error = false;
   if(out in data){
@@ -248,9 +244,9 @@ function merge(data, name1, name2, key, out){
     l1 = data[name1];
     l2 = data[name2];
     let keys = Object.keys(l1[0]);
-    
+    // Deal with that
     l1.forEach(e => { l2.forEach(f =>{ if(e[key] == f[key]){ keys.forEach(key => { (e[key] == "0")? e[key] = ((f[key])? f[key] : "0") : "0";});}})});
-    
+    // Might do the same as above
     l2.forEach(e => {
       let isIn = false;
       l1.forEach(f => {
@@ -264,5 +260,9 @@ function merge(data, name1, name2, key, out){
   }
   return data;
 }
+
+
+
+
 
 module.exports = {importFile,exportFile,merge};
