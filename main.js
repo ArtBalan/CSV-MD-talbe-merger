@@ -1,7 +1,7 @@
 const prompt = require('prompt-sync') ();
 const {errorDisplay, validate} = require("./error");
 
-const { importFile, exportFile, merge } = require('./functions');
+const { importFile, exportFile, merge, edit } = require('./functions');
 
 function helpMe(){
   console.log("$ exit - Leave the CLI");
@@ -16,6 +16,8 @@ function helpMe(){
   console.log("$ delete name - delete a data list");
   console.log("$ create name - create a data list");
   console.log("$ merge source base_on key with source2 on dest - merge 2 data lists")
+  console.log("$ preview name - display the keys of the first list element");
+  console.log("$ verify name - verify if all the list element have the same keys as the first one, and add them if missing");
 }
 
 
@@ -43,7 +45,7 @@ function main (){
           else console.log(data[inputParsed["display"]]);
           break;
         case "import" :
-          data = importFile(data,("import" in inputParsed)? inputParsed["import"] : false, ("as" in inputParsed)? inputParsed["as"] : false, ("type" in inputParsed)? inputParsed["type"] : false )
+          data = importFile(data, inputParsed["import"], inputParsed["as"], inputParsed["type"] );
           break;
 
         case "export" :
@@ -51,13 +53,13 @@ function main (){
           tempData = {};
           tempDataKey = ("export" in inputParsed)? inputParsed["export"] : false;
           tempData = (tempDataKey)? data[tempDataKey] : false;
-          (tempData)? exportFile(tempData, ("as" in inputParsed)? inputParsed["as"] : false) : errorDisplay(301);
+          (tempData)? exportFile(tempData, inputParsed["as"]) : errorDisplay(301);
           break;
 
         case "merge" :
           tempDataKey = ("based_on" in inputParsed)? inputParsed["based_on"] : false;
           tempData = ("on" in inputParsed)? inputParsed["on"] : false;
-          data = merge(data,("merge" in inputParsed)? inputParsed["merge"]:false,("with" in inputParsed)?inputParsed["with"]:false,tempDataKey,tempData);
+          data = merge(data, inputParsed["merge"],inputParsed["with"],tempDataKey,tempData);
           break;
 
         case "delete" :
@@ -76,7 +78,7 @@ function main (){
           break;
 
         case "edit":
-          console.log("edit")
+          data = edit(data, inputParsed["edit"], inputParsed["on"],   inputParsed["to"]);
           break;
           
         default:

@@ -1,13 +1,22 @@
 # Change log
 All notable changes to this project will be documented in this file.
 
-
 <hr>
 
 ## [X.Y.Z] - YYYY-MM-DD
 
 ### Added
 
+### Changed
+
+### Fixed
+
+<hr>
+
+## [1.1.0] - 2022-03-08
+
+### Added
+- command to edit list field
 ### Changed
 
 ### Fixed

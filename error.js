@@ -24,7 +24,12 @@ function errorDisplay(code){
       break;
     case 301: 
       console.log("Error " + code + " : List not found")
-      break;                                                                            
+      break;
+    
+    case 401:
+      console.log("Error " + code + " : Function not recognized")
+      break;
+
     default :
       console.log("Error " + code + " : Unkown error code");
   }

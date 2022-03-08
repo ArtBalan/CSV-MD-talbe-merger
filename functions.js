@@ -261,8 +261,47 @@ function merge(data, name1, name2, key, out){
   return data;
 }
 
+/**
+ * 
+ * Allow the user to tranform a list field
+ * 
+ * @param {object[]} data Main list
+ * @param {string} name List name 
+ * @param {string} key on whitch to apply the function 
+ * @param {string} fct function to apply 
+ */
+function edit(data, name, key, fct){
+  error = false;
+  switch(fct){
+    case "lowerCase":
+      fct = (str) => {return str.toLowerCase()};
+      break;
+    case "upperCase":
+      fct = (str) => {return str.toUpperCase()};
+      break;
+    case "snakeCase":
+      fct = (str) => {return ((((str.split(" ")).filter(e => e != "")).map(e => e.charAt(0).toUpperCase() + e.slice(1))).join("_")); }
+      break;
+    case "spaceCase": 
+      fct = (str) => {return str.replaceAll("-"," ")}
+      break;
+    default :
+      fct = false;
+      break;
+  }
+
+  if(fct){
+    data[name].forEach(e => e[key] = fct(e[key]));
+    return data;
+  } else {
+    errorDisplay(401);
+  }
 
 
 
 
-module.exports = {importFile,exportFile,merge};
+}
+
+
+
+module.exports = {importFile,exportFile,merge,edit};
