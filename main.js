@@ -75,14 +75,14 @@ function main (){
           else data[tempDataKey] = {};
           break;
 
-
-
         case "preview":
           console.log(Object.keys(data[inputParsed["preview"]][0]));
           break;
+          
         default:
           errorDisplay(1);
           break;
+
       }
     } else {
 
