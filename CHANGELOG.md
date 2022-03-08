@@ -13,6 +13,17 @@ All notable changes to this project will be documented in this file.
 
 <hr>
 
+## [1.1.1] - 2022-03-08
+
+### Added
+- edit command addition
+- preview command
+### Changed
+
+### Fixed
+
+<hr>
+
 ## [1.1.0] - 2022-03-08
 
 ### Added

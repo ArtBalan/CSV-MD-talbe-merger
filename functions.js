@@ -299,12 +299,6 @@ function edit(data, name, key, fct){
   } else {
     errorDisplay(401);
   }
-
-
-
-
 }
-
-
 
 module.exports = {importFile,exportFile,merge,edit};
