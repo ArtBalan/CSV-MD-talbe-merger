@@ -1,24 +1,21 @@
 const prompt = require('prompt-sync') ();
 const {errorDisplay, validate} = require("./error");
-
 const { importFile, exportFile, merge, edit } = require('./functions');
 
 function helpMe(){
   console.log("$ exit - Leave the CLI");
-  console.log("$ display - display the data lists");
-  console.log(" -- param");
-  console.log("   name - display the data lists");
-  console.log("   only key - show a specific key from a specific data list");
-  console.log("$ import file as name - import a file as a data list" );
-  console.log(" -- param");
-  console.log("   override ext - override the file extention (ex: import .txt file as csv");
-  console.log("$ export name as file - export a data list into a file");
-  console.log("$ delete name - delete a data list");
-  console.log("$ create name - create a data list");
-  console.log("$ merge source base_on key with source2 on dest - merge 2 data lists")
-  console.log("$ preview name - display the keys of the first list element");
+  console.log("$ display - Display the data lists");
+  console.log("  ↳ name - Display the data lists");
+  console.log("  ↳ only key - Show a specific key from a specific data list");
+  console.log("$ import file as name - Import a file as a data list" );
+  console.log("  ↳ type ext - Override the file extention (ex: import .txt file as csv");
+  console.log("$ export name as file - Export a data list into a file");
+  console.log("$ delete name - Delete a data list");
+  console.log("$ create name - Create a data list");
+  console.log("$ merge source base_on key with source2 on dest - Merge 2 data lists")
+  console.log("$ preview name - Display the keys of the first list element");
+  console.log("$ edit name on key to fct - Edit the entry of a list based on the key given")
 }
-
 
 function main (){
   let exit = false;
