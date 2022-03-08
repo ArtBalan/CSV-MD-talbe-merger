@@ -80,9 +80,14 @@ function main (){
           data = edit(data, inputParsed["edit"], inputParsed["on"],   inputParsed["to"]);
           break;
           
+        case "preview":
+          console.log(Object.keys(data[inputParsed["preview"]][0]));
+          break;
+          
         default:
           errorDisplay(1);
           break;
+
       }
     } else {
 
