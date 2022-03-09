@@ -272,6 +272,7 @@ function merge(data, name1, name2, key, out){
  */
 function edit(data, name, key, fct){
   error = false;
+  let spliter = (str) => { return (str.split(/(?=[A-Z_ ])/).filter(e=>e!=" ")).filter(e=>e!="_").map(e=>e.replaceAll(" ",""))}
   switch(fct){
     case "lowerCase" :
       fct = (str) => {return str.toLowerCase()};
@@ -279,14 +280,16 @@ function edit(data, name, key, fct){
     case "upperCase" :
       fct = (str) => {return str.toUpperCase()};
       break;
+    case "spaceCase" : 
+      fct = (str) => { return ((spliter(str).map(e=>e.charAt(0).toLowerCase()+e.slice(1)).join(" ")))}
+      break;
+    case "firstLetter":
+      fct = (str) => { return ((spliter(str).map(e=>e.charAt(0).toUpperCase()+e.slice(1))).join(" "))}
     case "snakeCase" :
-      fct = (str) => {return ((((str.split(" ")).filter(e => e != "")).map(e => e.charAt(0).toUpperCase() + e.slice(1))).join("_")); }
+      fct = (str) => {return ((spliter(str).map(e=>e.charAt(0).toUpperCase()+e.slice(1))).join("_"))}
       break;
     case "camelCase" :
-      fct = (str) => {return ((str.split(" ")).map(e => (e.charAt(0).toUpperCase() + e.slice(1)))).join("")}
-      break;
-    case "spaceCase" : 
-      fct = (str) => { return ((str.split(/(?=[A-Z])/)).join(" "))};
+      fct = (str) => {return ((spliter(str).map(e=>(e.charAt(0).toUpperCase()+e.slice(1)))).join(""))}
       break;
     default :
       fct = false;

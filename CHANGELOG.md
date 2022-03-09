@@ -13,6 +13,16 @@ All notable changes to this project will be documented in this file.
 
 <hr>
 
+## [1.2.1] - 2022-03-09
+
+### Added
+
+### Changed
+- better sting transform functions
+### Fixed
+
+<hr>
+
 ## [1.1.1] - 2022-03-08
 
 ### Added
