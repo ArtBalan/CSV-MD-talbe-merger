@@ -286,10 +286,10 @@ function edit(data, name, key, fct){
     case "firstLetter":
       fct = (str) => { return ((spliter(str).map(e=>e.charAt(0).toUpperCase()+e.slice(1))).join(" "))}
     case "snakeCase" :
-      fct = (str) => {return ((spliter(str).map(e=>e.charAt(0).toUpperCase()+e.slice(1))).join("_"))}
+      fct = (str) => { return ((spliter(str).map(e=>e.charAt(0).toUpperCase()+e.slice(1))).join("_"))}
       break;
     case "camelCase" :
-      fct = (str) => {return ((spliter(str).map(e=>(e.charAt(0).toUpperCase()+e.slice(1)))).join(""))}
+      fct = (str) => { return ((spliter(str).map(e=>e.charAt(0).toUpperCase()+e.slice(1))).join(""))}
       break;
     default :
       fct = false;
