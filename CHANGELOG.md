@@ -10,7 +10,16 @@ All notable changes to this project will be documented in this file.
 ### Changed
 
 ### Fixed
+<hr>
 
+## [1.2.1] - 2022-03-10
+
+### Added
+- user feed back on import
+- user feed back on merge
+### Changed
+- can import empty field on csv file
+### Fixed
 <hr>
 
 ## [1.2.1] - 2022-03-09

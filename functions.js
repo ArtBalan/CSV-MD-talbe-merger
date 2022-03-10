@@ -121,7 +121,7 @@ function csvToObject(str){
   let lines = str.split('\n');
   let keys = [];
   lines[0].split(separator).forEach(e => keys.push((e.replace("\r","")).trim()));  
-  return objectify(lines.slice(1), keys, separator);
+  return objectify(lines.slice(1), keys, separator,false);
 }
 
 /**
@@ -137,7 +137,7 @@ function tableToObject(str){
   let keys = [];
   lines[0].split(separator).forEach(e => keys.push((e.replace("\r","")).trim()));  
   keys = keys.filter(e => e.replace(/\s/g, ''));
-  return objectify(lines.slice(2), keys, separator);
+  return objectify(lines.slice(2), keys, separator,true);
 }
 
 /**
@@ -148,19 +148,26 @@ function tableToObject(str){
  * @param {string} separator str used to split the data
  * @returns objectified data
  */
-function objectify(data, keys,separator){
+function objectify(data, keys,separator,md){
+  let success = 0;
+  let failed = 0;
   let dataObjectified = [];
   data.forEach(e => {
     let temp = e.split(separator);
-    temp = temp.filter(e => e.replace(/\s/g, ''));
+    if(md) temp = temp.filter(e => e.replace(/\s/g, ''));
     if(temp.length == keys.length){
+      success += 1;
       let tempObject = {};
       for(let i=0; i<temp.length; i++){
        tempObject[keys[i]] = ((temp[i].replace("\n","")).replace("\r","")).trim();
       }
       dataObjectified.push(tempObject);
+    } else {
+      failed += 1;
     }
   });
+  console.log(success + " Entry imported.");
+  console.log(failed + " Entry failed.");
   return dataObjectified;
 }
 
@@ -232,7 +239,10 @@ function objectToCsv(objects){
  * @returns Main List
  */
 function merge(data, name1, name2, key, out){
+  console.log(out);
   let error = false;
+  let added = 0;
+  let merged = 0;
   if(out in data){
     error = (validate("This name is already taken, do you want to overwrite it ?"))? error : true;
   }
@@ -241,23 +251,35 @@ function merge(data, name1, name2, key, out){
     error = true;
   }
   if(!error){
-    l1 = data[name1];
+    let l3 = [];
+    data[name1].forEach(e=>l3.push(e));
     l2 = data[name2];
-    let keys = Object.keys(l1[0]);
+    let keys = Object.keys(l3[0]);
     // Deal with that
-    l1.forEach(e => { l2.forEach(f =>{ if(e[key] == f[key]){ keys.forEach(key => { (e[key] == "0")? e[key] = ((f[key])? f[key] : "0") : "0";});}})});
+    l3.forEach(e => { 
+      l2.forEach(f => {
+         if(e[key] == f[key]){ 
+           keys.forEach(key =>
+             { (e[key] == "0")? e[key] = ((f[key])? f[key] : "0") : "0";});
+            }
+      });
+    });
     // Might do the same as above
     l2.forEach(e => {
       let isIn = false;
-      l1.forEach(f => {
+      l3.forEach(f => {
         if(e["id"] == f["id"]){
           isIn = true;
         }
       });
-      if(!isIn) l1.push(e);
+      if(!isIn){ 
+        l3.push(e);
+        added += 1;
+      }
     });
-    data[out] = l1;
+    data[out] = l3;
   }
+  console.log(added + " Entry added to " + out);
   return data;
 }
 
