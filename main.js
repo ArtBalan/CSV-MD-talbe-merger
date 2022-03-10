@@ -1,6 +1,6 @@
 const prompt = require('prompt-sync') ();
 const {errorDisplay, validate} = require("./error");
-const { importFile, exportFile, merge, edit } = require('./functions');
+const { importFile, exportFile, merge, edit, purge } = require('./functions');
 
 function helpMe(){
   console.log("$ exit - Leave the CLI");
@@ -14,7 +14,8 @@ function helpMe(){
   console.log("$ create name - Create a data list");
   console.log("$ merge source base_on key with source2 on dest - Merge 2 data lists")
   console.log("$ preview name - Display the keys of the first list element");
-  console.log("$ edit name on key to fct - Edit the entry of a list based on the key given")
+  console.log("$ edit name on key to fct - Edit the entry of a list based on the key given");
+  console.log("$ purge name based_on key - remove the entry that have the same key");
 }
 
 function main (){
@@ -79,6 +80,12 @@ function main (){
           
         case "preview":
           console.log(Object.keys(data[inputParsed["preview"]][0]));
+          break;
+
+        case "purge":
+          tempData = inputParsed["purge"];
+          tempDataKey = inputParsed["based_on"];
+          data = purge(data, tempData,tempDataKey);
           break;
           
         default:

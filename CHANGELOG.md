@@ -12,11 +12,12 @@ All notable changes to this project will be documented in this file.
 ### Fixed
 <hr>
 
-## [1.2.1] - 2022-03-10
+## [1.3.1] - 2022-03-10
 
 ### Added
 - user feed back on import
 - user feed back on merge
+- added purge feature
 ### Changed
 - can import empty field on csv file
 ### Fixed

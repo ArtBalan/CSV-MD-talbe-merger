@@ -326,4 +326,32 @@ function edit(data, name, key, fct){
   }
 }
 
-module.exports = {importFile,exportFile,merge,edit};
+function purge(data, name, key){
+  let error = false;
+  let keyNotFound = 0;
+  let purged = 0;
+  let valueList = [];
+
+  if(!(name in data)){
+    errorDisplay(201);
+    error = true;
+  }
+  if(!error){
+    for (let i = 0; i < data[name].length; i++) {
+      if(data[name][i][key]){
+        if(!valueList.includes(data[name][i][key])){
+          valueList.push(data[name][i][key]);
+        } else {
+          delete data[name][i];
+          console.log("removed");
+        }
+      }
+    }
+    data[name].filter(e=>e)
+  }
+  console.log(valueList);
+  return data;
+}
+
+
+module.exports = {importFile,exportFile,merge,edit,purge};
